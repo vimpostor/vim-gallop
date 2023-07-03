@@ -45,7 +45,7 @@ func gallop#hints#show(l)
 		endwhile
 
 		redraw
-		let c = nr2char(getchar())
+		let c = getcharstr()
 		call gallop#hints#clear()
 
 		let labels = filter(labels, {_, v -> v.v[0] == c})->map({_, v -> #{i: v.i, v: v.v[1:]}})
