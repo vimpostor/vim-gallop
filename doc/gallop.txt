@@ -1,0 +1,28 @@
+*gallop.txt*	Navigate vim with ease.
+*gallop*
+
+CONTENTS						*gallop-contents*
+
+Introduction					|gallop-introduction|
+Configuration					|gallop-configure|
+Api						|gallop-api|
+
+==============================================================================
+INTRODUCTION						*gallop-introduction*
+
+Navigate vim with ease.
+
+------------------------------------------------------------------------------
+CONFIGURATION						*gallop-configure*
+
+	g:gallop_keys					*g:gallop_keys*
+		With this option it is possible to specify a custom key map to
+		use for the hints.
+
+------------------------------------------------------------------------------
+API							*gallop-api*
+
+	TBD
+
+==============================================================================
+	vim:tw=78:sw=4:ts=8:ft=help:norl:noet:
