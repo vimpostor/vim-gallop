@@ -1,5 +1,9 @@
 func gallop#hints#init()
-	call prop_type_add('gallop', {})
+	if has('nvim')
+		let s:ns = nvim_create_namespace('gallop')
+	else
+		call prop_type_add('gallop', {})
+	endif
 	let s:popups = []
 endfunc
 
@@ -14,7 +18,7 @@ func gallop#hints#unique_labels(n)
 
 	while len(r) < a:n
 		let a = remove(r, i)
-		let r = r[:i - 1] + mapnew(k, {_, v -> a .. v})[:a:n - len(r) - 1] + r[i:]
+		let r = r[:i - 1] + map(deepcopy(k), {_, v -> a .. v})[:a:n - len(r) - 1] + r[i:]
 
 		let i = (i - 1) % len(r)
 	endwhile
@@ -30,8 +34,12 @@ func gallop#hints#show(l)
 		while i < len(labels)
 			let x = a:l[labels[i].i]
 
-			call prop_add(x[0], x[1], #{type: 'gallop', length: 1, id: i + 1})
-			call add(s:popups, popup_create(labels[i].v, #{line: 1, col: 1, textprop: 'gallop', textpropid: i + 1, pos: 'botright', highlight: 'DiffText'}))
+			if has('nvim')
+				call add(s:popups, nvim_buf_set_extmark(bufnr('%'), s:ns, x[0] - 1, x[1] - 1, #{virt_text: [[labels[i].v, 'DiffText']], virt_text_pos: 'overlay'}))
+			else
+				call prop_add(x[0], x[1], #{type: 'gallop', length: 1, id: i + 1})
+				call add(s:popups, popup_create(labels[i].v, #{line: 1, col: 1, textprop: 'gallop', textpropid: i + 1, pos: 'botright', highlight: 'DiffText'}))
+			endif
 
 			let i += 1
 		endwhile
@@ -51,11 +59,15 @@ func gallop#hints#show(l)
 endfunc
 
 func gallop#hints#clear()
-	for i in s:popups
-		call popup_close(i)
-	endfor
-	let s:popups = []
-	call prop_remove(#{type: 'gallop', all: 1})
+	if has('nvim')
+		call nvim_buf_clear_namespace(bufnr('%'), s:ns, 0, -1)
+	else
+		for i in s:popups
+			call popup_close(i)
+		endfor
+		let s:popups = []
+		call prop_remove(#{type: 'gallop', all: 1})
+	endif
 endfunc
 
 call gallop#hints#init()

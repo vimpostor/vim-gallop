@@ -1,5 +1,5 @@
 func gallop#move#move(pat, back)
-	let cursor_pos = [line('.'), col('.')]
+	let cursor_pos = gallop#util#cursor()
 	let top_line = line('w0')
 	let bottom_line = line('w$')
 
