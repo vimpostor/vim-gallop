@@ -77,3 +77,27 @@ func Test_move_k()
 	call gallop#move#k()
 	call assert_equal([1, 1], gallop#util#cursor())
 endfunc
+
+func Test_move_s()
+	call cursor(1, 1)
+
+	call feedkeys('taki')
+	call feedkeys('s')
+	call gallop#move#s(4)
+	call Assert_word("takimata")
+
+	call feedkeys('jus')
+	call feedkeys('a')
+	call gallop#move#s(3)
+	call Assert_word("justo")
+
+	call feedkeys('et')
+	call feedkeys('s')
+	call gallop#move#s(2)
+	call Assert_word("et")
+
+	call feedkeys('c')
+	call feedkeys('s')
+	call gallop#move#s(1)
+	call Assert_word("accusam")
+endfunc

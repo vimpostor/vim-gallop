@@ -3,7 +3,13 @@ func gallop#move#move(pat, back)
 
 	" if back is 2, it means both forward and back
 	if a:back == 2
-		call extend(locs, gallop#match#match(a:pat, 0))
+		let f = gallop#match#match(a:pat, 0)
+		" intermangle both lists
+		let i = 0
+		for x in f
+			call insert(locs, x, i)
+			let i += 1 + (i < len(locs) - 1)
+		endfor
 	endif
 	call gallop#hints#show(locs)
 endfunc
