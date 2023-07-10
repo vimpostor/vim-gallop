@@ -52,10 +52,9 @@ func gallop#hints#show(l)
 	endwhile
 
 	if len(labels)
-		call cursor(a:l[labels[0].i])
-	else
-		echohl ErrorMsg | echo 'No matches' | echohl None
+		return a:l[labels[0].i]
 	endif
+	return [0, 0]
 endfunc
 
 func gallop#hints#clear()

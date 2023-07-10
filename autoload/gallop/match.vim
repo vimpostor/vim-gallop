@@ -1,7 +1,8 @@
-func gallop#match#match(pat, back)
-	let cursor_pos = gallop#util#cursor()
+func gallop#match#match(pat, back, visual)
 	let top_line = line('w0')
 	let bottom_line = line('w$')
+
+	let cursor_pos = gallop#util#cursor()
 
 	let locs = []
 	let p = [1, 1]
