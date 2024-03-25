@@ -1,5 +1,7 @@
 func gallop#move#move(pat, back, visual)
 	if a:visual
+		" first enter visual mode and leave again, otherwise the cursor would be at the start of the selection instead of at the last location
+		exec "normal! gv\<Esc>"
 		let visual_start = gallop#util#visual_start()
 	endif
 
