@@ -35,11 +35,11 @@ func gallop#move#wb(back, visual)
 	call gallop#move#move('\<', a:back, a:visual)
 endfunc
 
-func gallop#move#w(visual)
+func gallop#move#w(visual) range
 	call gallop#move#wb(0, a:visual)
 endfunc
 
-func gallop#move#b(visual)
+func gallop#move#b(visual) range
 	call gallop#move#wb(1, a:visual)
 endfunc
 
@@ -47,15 +47,15 @@ func gallop#move#jk(back, visual)
 	call gallop#move#move(printf('^.\{-}\zs\(\%%%dv\|$\)', virtcol('.')), a:back, a:visual)
 endfunc
 
-func gallop#move#j(visual)
+func gallop#move#j(visual) range
 	call gallop#move#jk(0, a:visual)
 endfunc
 
-func gallop#move#k(visual)
+func gallop#move#k(visual) range
 	call gallop#move#jk(1, a:visual)
 endfunc
 
-func gallop#move#s(n, visual)
+func gallop#move#s(n, visual) range
 	" allows the user to match for a specific string of length n
 	let s = ''
 	while len(s) < a:n
