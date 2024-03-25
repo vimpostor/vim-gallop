@@ -1,13 +1,7 @@
 func gallop#move#move(pat, back, visual)
 	if a:visual
-		" first enter visual mode and leave again, otherwise the cursor would be at the start of the selection instead of at the last location
-		exec "normal! gv\<Esc>"
-		let cursor_pos = gallop#util#cursor()
-		let visual_start = gallop#util#visual_top()
-		if cursor_pos == visual_start
-			" bottom->up visual selection (cursor on upper end)
-			let visual_start = gallop#util#visual_bot()
-		endif
+		" first enter visual mode again, it got lost in the mapping and otherwise the cursor would be at the start of the selection instead of at the last location
+		exec "normal! gv"
 	endif
 
 	let locs = gallop#match#match(a:pat, !!a:back, a:visual)
@@ -24,12 +18,6 @@ func gallop#move#move(pat, back, visual)
 	endif
 
 	let jump_pos = gallop#hints#show(locs)
-
-	if a:visual
-		" restore visual mode
-		keepjumps call cursor(visual_start)
-		exec "norm " . visualmode()
-	endif
 
 	if jump_pos[0] != 0
 		keepjumps call cursor(jump_pos)
