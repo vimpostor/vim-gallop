@@ -1,6 +1,4 @@
 func gallop#move#move(pat, back, visual)
-	" save original cursor position
-	let top_line = line('w0')
 	if a:visual
 		let visual_start = gallop#util#visual_start()
 	endif

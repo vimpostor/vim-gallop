@@ -1,4 +1,5 @@
 func gallop#match#match(pat, back, visual)
+	" save original cursor position
 	let top_line = line('w0')
 	let bottom_line = line('w$')
 
