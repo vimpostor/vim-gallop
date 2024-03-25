@@ -5,6 +5,13 @@ func gallop#hints#init()
 		call prop_type_add('gallop', {})
 	endif
 	let s:popups = []
+
+	call gallop#hints#setup_colors()
+	au ColorScheme * call gallop#hints#setup_colors()
+endfunc
+
+func gallop#hints#setup_colors()
+	hi default link GallopHint DiffText
 endfunc
 
 func gallop#hints#unique_labels(n)
@@ -35,10 +42,10 @@ func gallop#hints#show(l)
 			let x = a:l[labels[i].i]
 
 			if has('nvim')
-				call add(s:popups, nvim_buf_set_extmark(bufnr('%'), s:ns, x[0] - 1, x[1] - 1, #{virt_text: [[labels[i].v, 'DiffText']], virt_text_pos: 'overlay'}))
+				call add(s:popups, nvim_buf_set_extmark(bufnr('%'), s:ns, x[0] - 1, x[1] - 1, #{virt_text: [[labels[i].v, 'GallopHint']], virt_text_pos: 'overlay'}))
 			else
 				call prop_add(x[0], x[1], #{type: 'gallop', length: 1, id: i + 1})
-				call add(s:popups, popup_create(labels[i].v, #{line: 1, col: 1, textprop: 'gallop', textpropid: i + 1, pos: 'botright', highlight: 'DiffText'}))
+				call add(s:popups, popup_create(labels[i].v, #{line: 1, col: 1, textprop: 'gallop', textpropid: i + 1, pos: 'botright', highlight: 'GallopHint'}))
 			endif
 
 			let i += 1

@@ -6,6 +6,7 @@ CONTENTS						*gallop-contents*
 Introduction					|gallop-introduction|
 Configuration					|gallop-configure|
 Api						|gallop-api|
+Colors						|gallop-colors|
 
 ==============================================================================
 INTRODUCTION						*gallop-introduction*
@@ -23,6 +24,15 @@ CONFIGURATION						*gallop-configure*
 API							*gallop-api*
 
 	TBD
+
+------------------------------------------------------------------------------
+COLORS							*gallop-colors*
+
+Some of the colors used in this plugin can be configured with the following
+highlight groups.
+
+	GallopHint					*GallopHint*
+		The color of the hint popups.
 
 ==============================================================================
 	vim:tw=78:sw=4:ts=8:ft=help:norl:noet:
