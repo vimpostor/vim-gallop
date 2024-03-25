@@ -11,4 +11,6 @@ func gallop#init()
 	xnoremap <silent> <LocalLeader>j :call gallop#move#j(1)<CR>
 	noremap <silent> <LocalLeader>k :call gallop#move#k(0)<CR>
 	xnoremap <silent> <LocalLeader>k :call gallop#move#k(1)<CR>
+	noremap <silent> <LocalLeader>s :call gallop#move#s(2, 0)<CR>
+	xnoremap <silent> <LocalLeader>s :call gallop#move#s(2, 1)<CR>
 endfunc
