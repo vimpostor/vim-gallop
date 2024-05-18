@@ -27,7 +27,7 @@ func gallop#hints#unique_labels(n)
 		let a = remove(r, i)
 		let r = (i > 0 ? r[:i - 1] : []) + map(deepcopy(k), {_, v -> a .. v})[:a:n - len(r) - 1] + r[i:]
 
-		let i = (i - 1) % len(r)
+		let i = (i - 1 + len(r)) % len(r)
 	endwhile
 
 	return r[:a:n - 1]
