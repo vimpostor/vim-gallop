@@ -101,3 +101,13 @@ func Test_move_s()
 	call gallop#move#s(1, 0)
 	call Assert_word("accusam")
 endfunc
+
+func Test_no_duplicates()
+	for i in range(3)
+		let n = float2nr(pow(len(g:gallop_keys), i)) + 1
+		let r = gallop#hints#unique_labels(n)
+		call assert_equal(n, len(r))
+		let s = sort(r)
+		call assert_equal(uniq(copy(s)), s)
+	endfor
+endfunc
