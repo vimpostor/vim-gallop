@@ -20,7 +20,7 @@ func gallop#hints#unique_labels(n)
 	endif
 
 	let k = split(g:gallop_keys, '\zs')
-	let r = k
+	let r = deepcopy(k)
 	let i = len(r) - 1
 
 	while len(r) < a:n
