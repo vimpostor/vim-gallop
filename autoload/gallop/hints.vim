@@ -19,7 +19,7 @@ func gallop#hints#unique_labels(n)
 		return []
 	endif
 
-	let k = split(g:gallop_keys, '\zs')
+	let k = split(g:gallop_options.keys, '\zs')
 	let r = deepcopy(k)
 	let i = len(r) - 1
 

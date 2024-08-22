@@ -104,7 +104,7 @@ endfunc
 
 func Test_no_duplicates()
 	for i in range(4)
-		let n = float2nr(pow(len(g:gallop_keys), i)) + 1
+		let n = float2nr(pow(len(g:gallop_options.keys), i)) + 1
 		let r = gallop#hints#unique_labels(n)
 		call assert_equal(n, len(r))
 		let s = sort(r)
@@ -114,7 +114,7 @@ endfunc
 
 func Test_no_prefix_collision()
 	for i in range(3)
-		let n = float2nr(pow(len(g:gallop_keys), i)) + 1
+		let n = float2nr(pow(len(g:gallop_options.keys), i)) + 1
 		let r = gallop#hints#unique_labels(n)
 		for i in r
 			" the only label containing i as prefix is itself

@@ -16,14 +16,21 @@ Navigate vim with ease.
 ------------------------------------------------------------------------------
 CONFIGURATION						*gallop-configure*
 
-	g:gallop_keys					*g:gallop_keys*
+	g:gallop_options				*g:gallop_options*
+All user-facing options are configured with the |g:gallop_options| variable,
+which is a |Dictionary| containing all options as key-value pairs.
+The default options can be retrieved with |gallop#default_options()|.
+The following keys are available:
+
+	"keys"						*gallop_options_keys*
 		With this option it is possible to specify a custom key map to
 		use for the hints.
 
 ------------------------------------------------------------------------------
 API							*gallop-api*
 
-	TBD
+	gallop#default_options()			*gallop#default_options()*
+		Returns the default values for |g:gallop_options|.
 
 ------------------------------------------------------------------------------
 COLORS							*gallop-colors*
