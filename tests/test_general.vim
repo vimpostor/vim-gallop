@@ -122,3 +122,31 @@ func Test_no_prefix_collision()
 		endfor
 	endfor
 endfunc
+
+func Test_benchmark()
+	tabnew
+	" prepare to show a hint at every second character
+	call append(1, repeat('_ ', 4096))
+	call deletebufline(bufnr('%'), 1)
+
+	let log_file = "/tmp/.vim-gallop-perf.log"
+	exec printf("profile start %s", log_file)
+	profile func gallop#move#move
+
+	call feedkeys("\<Esc>")
+	call gallop#move#w(0)
+
+	profile stop
+
+	let log = readfile(log_file, '', 5)
+	call assert_equal('FUNCTION  gallop#move#move()', log[0])
+
+	let total_time = str2float(log[3]->matchstr('\d\.\d\+'))
+	call assert_match("Total time:", log[3])
+
+	let self_time = str2float(log[4]->matchstr('\d\.\d\+'))
+	call assert_match("Self time:", log[4])
+
+	echo printf("Total time: %f\n Self time: %f", total_time, self_time)
+	bd!
+endfunc
