@@ -131,7 +131,7 @@ func Test_benchmark()
 
 	let log_file = "/tmp/.vim-gallop-perf.log"
 	exec printf("profile start %s", log_file)
-	profile func gallop#move#move
+	profile func gallop#hints#show
 
 	call feedkeys("\<Esc>")
 	call gallop#move#w(0)
@@ -139,7 +139,7 @@ func Test_benchmark()
 	profile stop
 
 	let log = readfile(log_file, '', 5)
-	call assert_equal('FUNCTION  gallop#move#move()', log[0])
+	call assert_equal('FUNCTION  gallop#hints#show()', log[0])
 
 	let total_time = str2float(log[3]->matchstr('\d\.\d\+'))
 	call assert_match("Total time:", log[3])
