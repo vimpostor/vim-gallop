@@ -22,6 +22,10 @@ which is a |Dictionary| containing all options as key-value pairs.
 The default options can be retrieved with |gallop#default_options()|.
 The following keys are available:
 
+	"default_mappings"				*gallop_options_default_mappings*
+		If truthy, use the default keybindings. When you disable this,
+		refer to |gallop-api| for how to setup your own keybindings.
+
 	"keys"						*gallop_options_keys*
 		With this option it is possible to specify a custom key map to
 		use for the hints.
