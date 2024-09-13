@@ -4,10 +4,10 @@
 CONTENTS						*gallop-contents*
 
 Introduction					|gallop-introduction|
-Rationale					|gallop-rationale|
 Configuration					|gallop-configure|
 Api						|gallop-api|
 Colors						|gallop-colors|
+Rationale					|gallop-rationale|
 
 ==============================================================================
 INTRODUCTION						*gallop-introduction*
@@ -17,49 +17,8 @@ This plugin offers a convenient way to perform large distance jumps in the
 current window, with the aim to be as fast or faster than using a mouse to
 place the cursor.
 The rationale is to show hints to the user for possible jump locations, which
-can be jumped to by pressing the corresponding keys.
-
-------------------------------------------------------------------------------
-RATIONALE						*gallop-rationale*
-
-Great care is taken to provide uniformly small hint strings over the entire
-search space, as well as establishing an automatic resistance against typos by
-placing similar labels next to each other, so that the intended jump location
-can be reached with normal vim motions after a typo.
-Due to this, most jump locations are reachable in less than a second and
-without much mental overhead.
-
-A popular mistake for jumping plugins is to encourage a motion, where the user
-has to type a few characters of the jump location only to be further prompted
-again if the characters match multiple times in the window. This mechanism
-needlessly increases the mental overhead for multiple reasons. The user does
-not know a-priori if the second prompt will occur, as it might be surprising
-that the characters matches more than one time. Furthermore the user is
-prompted for two high-latency inputs, even though one high-latency input is
-already at the limit of what would be considered fast. In this case the first
-input already has high latency, because the user must read and input the
-characters of the jump location, even though the user might not be yet aware
-of the precise jump location (e.g. often jumps are performed semantically,
-i.e. the user knows they want to jump to an if condition at the end of the
-window, but they do not necessarily want to read and input the exact
-characters of that condition). The second high-latency input is the input due
-to having to read the a-priori unknown hint characters, which is unavoidable
-for all motions.
-This plugin offers this very same high-latency mechanism with |gallop#move#s|,
-however the user is encouraged to try some of the low-latency alternatives,
-such as |gallop#move#w| for moving forward and |gallop#move#b| to move
-backwards. For these alternatives the first input prompt is just the general
-direction of the jump, i.e. if the jump is before or after the cursor. This
-information is instantly recognizable for all jumps and does not rely on exact
-characters of jump locations, which gives it much lower latency than the
-equivalent first prompt of |gallop#move#s|. While the search space of the
-hints in the following second prompt increases in comparison, this is not
-really a problem since the amount of characters to type for a hint only
-increases logarithmically in relation to the number of hints. Furthermore this
-tradeoff pays off by combining two high-latency prompts into just one
-high-latency prompt, which means that the large absolute latency offset for
-comprehending the prompt is only added once to the total, while there is
-almost no latency for the first prompt, as it is just the general direction.
+can be jumped to by pressing the corresponding keys. For a more detailed
+description of the rationale see |gallop-rationale|.
 
 ------------------------------------------------------------------------------
 CONFIGURATION						*gallop-configure*
@@ -115,6 +74,48 @@ highlight groups.
 
 	GallopHint					*GallopHint*
 		The color of the hint popups.
+
+------------------------------------------------------------------------------
+RATIONALE						*gallop-rationale*
+
+Great care is taken to provide uniformly small hint strings over the entire
+search space, as well as establishing an automatic resistance against typos by
+placing similar labels next to each other, so that the intended jump location
+can be reached with normal vim motions after a typo.
+Due to this, most jump locations are reachable in less than a second and
+without much mental overhead.
+
+A popular mistake for jumping plugins is to encourage a motion, where the user
+has to type a few characters of the jump location only to be further prompted
+again if the characters match multiple times in the window. This mechanism
+needlessly increases the mental overhead for multiple reasons. The user does
+not know a-priori if the second prompt will occur, as it might be surprising
+that the characters matches more than one time. Furthermore the user is
+prompted for two high-latency inputs, even though one high-latency input is
+already at the limit of what would be considered fast. In this case the first
+input already has high latency, because the user must read and input the
+characters of the jump location, even though the user might not be yet aware
+of the precise jump location (e.g. often jumps are performed semantically,
+i.e. the user knows they want to jump to an if condition at the end of the
+window, but they do not necessarily want to read and input the exact
+characters of that condition). The second high-latency input is the input due
+to having to read the a-priori unknown hint characters, which is unavoidable
+for all motions.
+This plugin offers this very same high-latency mechanism with |gallop#move#s|,
+however the user is encouraged to try some of the low-latency alternatives,
+such as |gallop#move#w| for moving forward and |gallop#move#b| to move
+backwards. For these alternatives the first input prompt is just the general
+direction of the jump, i.e. if the jump is before or after the cursor. This
+information is instantly recognizable for all jumps and does not rely on exact
+characters of jump locations, which gives it much lower latency than the
+equivalent first prompt of |gallop#move#s|. While the search space of the
+hints in the following second prompt increases in comparison, this is not
+really a problem since the amount of characters to type for a hint only
+increases logarithmically in relation to the number of hints. Furthermore this
+tradeoff pays off by combining two high-latency prompts into just one
+high-latency prompt, which means that the large absolute latency offset for
+comprehending the prompt is only added once to the total, while there is
+almost no latency for the first prompt, as it is just the general direction.
 
 ==============================================================================
 	vim:tw=78:sw=4:ts=8:ft=help:norl:noet:
