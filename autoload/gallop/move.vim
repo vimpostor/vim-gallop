@@ -20,7 +20,7 @@ func gallop#move#move(pat, back, visual)
 	let jump_pos = gallop#hints#show(locs)
 
 	if jump_pos[0] != 0
-		keepjumps call cursor(jump_pos)
+		call cursor(jump_pos)
 	else
 		echohl ErrorMsg | echo 'No matches' | echohl None
 	endif

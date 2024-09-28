@@ -16,7 +16,7 @@ func gallop#match#match(pat, back, visual)
 
 	" reset cursor
 	keepjumps call winrestview(#{lnum: cursor_pos[0], topline: top_line})
-	keepjumps call cursor(cursor_pos)
+	call cursor(cursor_pos)
 
 	return locs
 endfunc
