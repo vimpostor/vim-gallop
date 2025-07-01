@@ -25,12 +25,12 @@ func Test_move_w()
 
 	" move one word further
 	call feedkeys('a')
-	call gallop#move#w(0)
+	call gallop#move#w()
 	call Assert_word("ipsum")
 
 	" move two words further
 	call feedkeys('s')
-	call gallop#move#w(0)
+	call gallop#move#w()
 	call Assert_word("sit")
 endfunc
 
@@ -41,12 +41,12 @@ func Test_move_b()
 
 	" move back one word
 	call feedkeys('a')
-	call gallop#move#b(0)
+	call gallop#move#b()
 	call Assert_word("At")
 
 	" move back across lines
 	call feedkeys('a')
-	call gallop#move#b(0)
+	call gallop#move#b()
 	call Assert_word("voluptua")
 endfunc
 
@@ -55,12 +55,12 @@ func Test_move_j()
 
 	" move down one line
 	call feedkeys('a')
-	call gallop#move#j(0)
+	call gallop#move#j()
 	call assert_equal([2, 1], gallop#util#cursor())
 
 	" move down two lines
 	call feedkeys('s')
-	call gallop#move#j(0)
+	call gallop#move#j()
 	call assert_equal([4, 1], gallop#util#cursor())
 endfunc
 
@@ -69,12 +69,12 @@ func Test_move_k()
 
 	" move up one line
 	call feedkeys('a')
-	call gallop#move#k(0)
+	call gallop#move#k()
 	call assert_equal([3, 1], gallop#util#cursor())
 
 	" move up two lines
 	call feedkeys('s')
-	call gallop#move#k(0)
+	call gallop#move#k()
 	call assert_equal([1, 1], gallop#util#cursor())
 endfunc
 
@@ -83,22 +83,22 @@ func Test_move_s()
 
 	call feedkeys('taki')
 	call feedkeys('s')
-	call gallop#move#s(4, 0)
+	call gallop#move#s(4)
 	call Assert_word("takimata")
 
 	call feedkeys('jus')
 	call feedkeys('a')
-	call gallop#move#s(3, 0)
+	call gallop#move#s(3)
 	call Assert_word("justo")
 
 	call feedkeys('et')
 	call feedkeys('s')
-	call gallop#move#s(2, 0)
+	call gallop#move#s(2)
 	call Assert_word("et")
 
 	call feedkeys('c')
 	call feedkeys('s')
-	call gallop#move#s(1, 0)
+	call gallop#move#s(1)
 	call Assert_word("accusam")
 endfunc
 
@@ -123,6 +123,34 @@ func Test_no_prefix_collision()
 	endfor
 endfunc
 
+func Test_no_viewport_moves()
+	tabnew
+	call append(1, range(0, 1024))
+	norm 128G0lv
+	norm 512G10j
+	let viewport = winline()
+
+	call feedkeys("\<Esc>")
+	call gallop#move#k()
+
+	" viewport should not change
+	call assert_equal(viewport, winline())
+	bd!
+endfunc
+
+func Test_supports_visual()
+	call cursor(2, 1)
+	norm wv
+	call Assert_word("vero")
+
+	call feedkeys('s')
+	call gallop#move#b()
+	call Assert_word("voluptua")
+
+	call assert_equal("v", mode())
+	norm v
+endfunc
+
 func Test_benchmark()
 	tabnew
 	" prepare to show a hint at every second character
@@ -134,7 +162,7 @@ func Test_benchmark()
 	profile func gallop#hints#show
 
 	call feedkeys("\<Esc>")
-	call gallop#move#w(0)
+	call gallop#move#w()
 
 	profile stop
 

@@ -43,28 +43,23 @@ API							*gallop-api*
 	gallop#default_options()			*gallop#default_options()*
 		Returns the default values for |g:gallop_options|.
 
-	gallop#move#b(visual)				*gallop#move#b()*
-		Shows hints at every word step in backwards direction. The
-		`visual` argument must be truthy if called in visual mode.
+	gallop#move#b()					*gallop#move#b()*
+		Shows hints at every word step in backwards direction.
 
-	gallop#move#j(visual)				*gallop#move#j()*
+	gallop#move#j()					*gallop#move#j()*
 		Shows hints for the entire current column in downwards
-		direction. The `visual` argument must be truthy if called in
-		visual mode.
+		direction.
 
-	gallop#move#k(visual)				*gallop#move#k()*
+	gallop#move#k()					*gallop#move#k()*
 		Shows hints for the entire current column in upwards
-		direction. The `visual` argument must be truthy if called in
-		visual mode.
+		direction.
 
-	gallop#move#s(count, visual)			*gallop#move#s()*
+	gallop#move#s(count)				*gallop#move#s()*
 		Prompts for `count` many characters as input and shows hints
 		for every part in the window, where those characters match.
-		The `visual` argument must be truthy if called in visual mode.
 
-	gallop#move#w(visual)				*gallop#move#w()*
-		Shows hints at every word step in forward direction. The
-		`visual` argument must be truthy if called in visual mode.
+	gallop#move#w()					*gallop#move#w()*
+		Shows hints at every word step in forward direction.
 
 ------------------------------------------------------------------------------
 COLORS							*gallop-colors*
